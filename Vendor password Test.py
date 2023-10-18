@@ -15,8 +15,7 @@ root.title("Vendor Password Reset Tool")
 
 def resetfunc():
     options = Options()
-    options.add_argument('--headless')
-    options.add_argument('--disable-gpu')
+    options.add_argument('--headless=new')
     
     Email = email_input.get()
 
