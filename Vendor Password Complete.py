@@ -7,12 +7,17 @@ from selenium.webdriver.common.alert import Alert
 from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
+from selenium.webdriver.chrome.options import Options
 
 root = Tk()
 root.title("Vendor Password Reset Tool")
 
 
 def resetfunc():
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    
     Email = email_input.get()
 
     #copies to clipboard email response.
@@ -20,11 +25,11 @@ def resetfunc():
 
     #Location of Chromedriver.exe file
     PATH = "C:\Program Files (x86)\chromedriver.exe"
-    driver = webdriver.Chrome(PATH)
+    driver = webdriver.Chrome(PATH, chrome_options=options)
 
     #Goes to the supplier portal page and will throw an exception if the page does not load in time
     try:
-        driver.set_page_load_timeout(1)
+        driver.set_page_load_timeout(3)
         driver.get("http://supplierportal/SitePages/SupplierAdmin.aspx")
     except TimeoutException as ex:
         pass
